@@ -47,7 +47,8 @@ namespace crosspromotion {
 
 					Action<bool, string> loadConfigCallBack = delegate (bool success, string s) {
 						if (success) {
-							CheckCrosspromotionStatus();
+							data = LoadUserData();
+							CheckCrosspromotionStatus(data, false);
 							OpenWebview(domain);
 						}
 						else {
@@ -76,24 +77,29 @@ namespace crosspromotion {
 			}
 		}
 
-		static void CheckCrosspromotionStatus() {
+		static void CheckCrosspromotionStatus(CrossPromotionData data, bool isInit) {
 
 			List<CrossPromotionItemConfig> items = crossPromotionConfig.GetList();
 			for (int i = 0; i < items.Count; i++) {
 				CrossPromotionItemConfig item = items[i];
 				if (item.enable)
-					CheckCrosspromotionStatus(item);
+					CheckCrosspromotionStatus(data, item, isInit);
 			}
 
 		}
 
-		static void CheckCrosspromotionStatus(CrossPromotionItemConfig item) {
+		static void CheckCrosspromotionStatus(CrossPromotionData data, CrossPromotionItemConfig item, bool isInit) {
 			string value = item.androidID;
 #if UNITY_IPHONE
 			value = item.iosID;
 #endif
 			if (Utils.checkPackageAppIsPresent(value)) {
-				data.GetItem(item.id).SetComplete();
+				if (isInit) {
+					data.GetItem(item.id).SetInvalid();
+				}
+				else {
+					data.GetItem(item.id).SetComplete();
+				}
 			}
 		}
 		static void OpenWebview(string domain) {
@@ -175,7 +181,7 @@ namespace crosspromotion {
 			webView.toolBarShow = true;
 			return webView;
 		}
-		public CrossPromotionData LoadUserData() {
+		private static CrossPromotionData LoadUserData() {
 			if (HasUserData()) {
 				BinaryFormatter bf = new BinaryFormatter();
 				FileStream stream = new FileStream(FilePath(), FileMode.Open);
@@ -184,13 +190,15 @@ namespace crosspromotion {
 				return JsonMapper.ToObject<CrossPromotionData>(data);
 			}
 			else {
-				return new CrossPromotionData();
+				CrossPromotionData ret = new CrossPromotionData();
+				CheckCrosspromotionStatus(ret,true);
+				return ret;
 			}
 		}
-		public bool HasUserData() {
+		private static bool HasUserData() {
 			return File.Exists(FilePath());
 		}
-		public static string FilePath() {
+		private static string FilePath() {
 			return Application.persistentDataPath + "/" + fileName;
 		}
 	}
