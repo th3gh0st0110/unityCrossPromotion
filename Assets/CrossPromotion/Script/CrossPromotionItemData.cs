@@ -3,8 +3,9 @@
 	public class CrossPromotionItemData
 	{
 		public int id;
-		public bool isClaimed;
-		public bool isComplete;
+		public bool isClaimed = false;
+		public bool isComplete = false;
+		public bool invalid = false;
 
 		public void SetComplete()
 		{
@@ -14,6 +15,11 @@
 		public void Claim()
 		{
 			isClaimed = true;
+		}
+
+		public void SetInvalid()
+		{
+			this.invalid = true;
 		}
 	}
 }

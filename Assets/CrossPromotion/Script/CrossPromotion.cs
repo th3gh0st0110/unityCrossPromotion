@@ -82,7 +82,7 @@ namespace crosspromotion {
 			List<CrossPromotionItemConfig> items = crossPromotionConfig.GetList();
 			for (int i = 0; i < items.Count; i++) {
 				CrossPromotionItemConfig item = items[i];
-				if (item.enable)
+				if (item.enable || isInit)
 					CheckCrosspromotionStatus(data, item, isInit);
 			}
 
@@ -98,7 +98,8 @@ namespace crosspromotion {
 					data.GetItem(item.id).SetInvalid();
 				}
 				else {
-					data.GetItem(item.id).SetComplete();
+					if (!data.GetItem(item.id).invalid)
+						data.GetItem(item.id).SetComplete();
 				}
 			}
 		}
@@ -129,6 +130,7 @@ namespace crosspromotion {
 				if (int.TryParse(message.args["value"], out value) & int.TryParse(message.args["id"], out id)) {
 					string appId = crossPromotionConfig.GetAppId(id);
 					data.GetItem(id).Claim();
+					Save();
 					rewardAction.Invoke(type, value);
 					interact.Invoke(Interact.ClaimReward, appId);
 				}
@@ -191,7 +193,8 @@ namespace crosspromotion {
 			}
 			else {
 				CrossPromotionData ret = new CrossPromotionData();
-				CheckCrosspromotionStatus(ret,true);
+				CheckCrosspromotionStatus(ret, true);
+				Save();
 				return ret;
 			}
 		}
@@ -200,6 +203,15 @@ namespace crosspromotion {
 		}
 		private static string FilePath() {
 			return Application.persistentDataPath + "/" + fileName;
+		}
+		private static void Save() {
+			if (data != null) {
+				string text = JsonMapper.ToJson(data);
+				BinaryFormatter bf = new BinaryFormatter();
+				FileStream stream = new FileStream(FilePath(), FileMode.Create);
+				bf.Serialize(stream, text);
+				stream.Close();
+			}
 		}
 	}
 }
