@@ -98,7 +98,7 @@ namespace crosspromotion {
 					data.GetItem(item.id).SetInvalid();
 				}
 				else {
-					if (!data.GetItem(item.id).invalid)
+					if (data.GetItem(item.id).isValid)
 						data.GetItem(item.id).SetComplete();
 				}
 			}
