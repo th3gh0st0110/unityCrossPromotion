@@ -5,7 +5,7 @@
 		public int id;
 		public bool isClaimed = false;
 		public bool isComplete = false;
-		public bool invalid = false;
+		public bool isValid = true;
 
 		public void SetComplete()
 		{
@@ -19,7 +19,7 @@
 
 		public void SetInvalid()
 		{
-			this.invalid = true;
+			this.isValid = false;
 		}
 	}
 }
