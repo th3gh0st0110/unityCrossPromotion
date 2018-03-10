@@ -12,22 +12,21 @@ public class test : MonoBehaviour {
 			text += "\n" + error + ": " + message;
 		});
 		CrossPromotion.ListenClaimReward(delegate (string type, int value) {
-			text +="\n"+ type + " " + value;
+			text += "\n" + type + " " + value;
 		});
 		CrossPromotion.ListenOnOpenAction(delegate () {
 			text += "\n Open";
 		});
 		CrossPromotion.ListenInteractAction(delegate (Interact interact, string appId) {
-			text += "\n"+interact + " " + appId;
+			text += "\n" + interact + " " + appId;
 		});
-		CrossPromotion.ListenOnCloseAction(delegate()
-		{
+		CrossPromotion.ListenOnCloseAction(delegate () {
 			text += "\n Close";
 		});
 	}
 
 	void OnGUI() {
-		if (GUILayout.Button("Show")) {
+		if (GUI.Button(new Rect(0, 0, 200, 200), "Show")) {
 			CrossPromotion.Show(domain);
 		}
 		GUILayout.Label(text);

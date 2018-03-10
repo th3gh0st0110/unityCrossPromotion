@@ -110,6 +110,8 @@ namespace crosspromotion {
 			_webView = CreateWebView();
 			string t = string.Format("\"{0}\"", JsonMapper.ToJson(data));
 			_webView.url = domain + "/?data=" + JsonMapper.ToJson(data);
+			_webView.CleanCache();
+			_webView.backButtonEnable = true;
 			int bottomInset = UniWebViewHelper.screenHeight;
 			_webView.insets = new UniWebViewEdgeInsets(0, 0, 0, 0);
 			_webView.OnReceivedMessage += OnReceivedMessage;
