@@ -9,8 +9,8 @@ namespace crosspromotion {
 		public int reward { get; set; }
 		public string rewardType { get; set; }
 		public int require { get; set; }
-		public string androidID { get; set; }
-		public string iosID { get; set; }
+		public string androidLink { get; set; }
+		public string iosLink { get; set; }
 		public bool enable { get; set; }
 
 	}

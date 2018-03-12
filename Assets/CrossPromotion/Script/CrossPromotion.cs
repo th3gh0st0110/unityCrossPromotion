@@ -89,11 +89,12 @@ namespace crosspromotion {
 		}
 
 		static void CheckCrosspromotionStatus(CrossPromotionData data, CrossPromotionItemConfig item, bool isInit) {
-			string appId = item.androidID;
+			string appId = item.androidLink;
 #if UNITY_IPHONE
-			appId = item.iosID;
+			appId = item.iosLink;
 #endif
-			if (Utils.checkPackageAppIsPresent(appId)) {
+			string id = Utils.GetValueFromUrl(appId, "id");
+			if (Utils.checkPackageAppIsPresent(id)) {
 				if (isInit) {
 					data.GetItem(item.id).SetInvalid();
 				}

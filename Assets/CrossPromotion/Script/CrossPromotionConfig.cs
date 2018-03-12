@@ -31,9 +31,9 @@ namespace crosspromotion {
 			if (itemConfig != null)
 			{
 #if UNITY_IPHONE
-				return itemConfig.iosID;
+				return itemConfig.iosLink;
 #else
-				return itemConfig.androidID;
+				return itemConfig.androidLink;
 #endif
 
 			}
