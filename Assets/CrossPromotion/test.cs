@@ -23,6 +23,9 @@ public class test : MonoBehaviour {
 		CrossPromotion.ListenOnCloseAction(delegate () {
 			text += "\n Close";
 		});
+		string url =
+			"market://details?id=com.Zonmob.GodofEra&referrer=utm_source%3DShadow_of_death%26utm_medium%3DGiftbox%26utm_campaign%3D3%2524_Giftbox_SD";
+		Debug.Log(Utils.GetValueFromUrl(url, "id"));
 	}
 
 	void OnGUI() {

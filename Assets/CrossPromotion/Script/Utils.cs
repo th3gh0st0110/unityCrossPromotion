@@ -2,10 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-namespace crosspromotion
-{
-	public static class Utils
-	{
+namespace crosspromotion {
+	public static class Utils {
 		public static bool checkPackageAppIsPresent(string package) {
 			AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 			AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
@@ -36,6 +34,26 @@ namespace crosspromotion
 			else {
 				action(true);
 			}
+		}
+
+		public static string GetValueFromUrl(string url, string parameterId) {
+			string[] split = url.Split(Convert.ToChar("?"));
+			for (int i = 1; i < split.Length; i++) {
+				string t = split[i];
+				string[] split2 = t.Split(Convert.ToChar("&"));
+				for (int j = 0; j < split2.Length; j++)
+				{
+					string t2 = split2[j];
+					string[] split3 = t2.Split(Convert.ToChar("="));
+					if (split3.Length == 2)
+					{
+						string key = split3[0];
+						string val = split3[1];
+						if (key == parameterId) return val;
+					}
+				}
+			}
+			return "";
 		}
 	}
 }

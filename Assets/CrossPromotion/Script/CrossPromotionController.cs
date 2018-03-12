@@ -102,7 +102,7 @@ namespace crosspromotion {
 #if UNITY_IPHONE
 			value = item.iosID;
 #endif
-			if (Utils.checkPackageAppIsPresent(value)) {
+			if (Utils.checkPackageAppIsPresent(Utils.GetValueFromUrl(value, "id"))) {
 				data.GetItem(item.id).SetComplete();
 			}
 		}
@@ -140,11 +140,6 @@ namespace crosspromotion {
 			}
 			if (message.path == "OpenApp") {
 				Close(webView);
-				string prefix = "market://details?id=";
-
-#if UNITY_IPHONE
-				prefix = "itms-apps://itunes.apple.com/app/";
-#endif
 				try {
 					string id = message.args["id"];
 					string appId = crossPromotionConfig.GetAppId(int.Parse(id));
@@ -161,13 +156,8 @@ namespace crosspromotion {
 		private IEnumerator DelayOpenApp(string appId) {
 			yield return null;
 			yield return null;
-			string prefix = "market://details?id=";
-
-#if UNITY_IPHONE
-				prefix = "itms-apps://itunes.apple.com/app/";
-#endif
 			interact.Invoke(Interact.InstallApp, appId);
-			Application.OpenURL(prefix + appId);
+			Application.OpenURL(appId);
 		}
 
 		void Close(UniWebView webView) {
