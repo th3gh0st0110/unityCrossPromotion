@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{21C1A536-7AB8-E100-6243-226CB7BD413C}</ProjectGuid>
+    <ProjectGuid>{82A81AC7-3BFA-AAE2-6275-E1A2FCB62723}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -59,32 +59,26 @@
      <Compile Include="Assets\CrossPromotion\LitJson\ParserToken.cs" />
      <Compile Include="Assets\CrossPromotion\LitJson\Platform.cs" />
      <Compile Include="Assets\CrossPromotion\LitJson\Unity\UnityTypeBindings.cs" />
-     <Compile Include="Assets\CrossPromotion\Plugins\UniWebViewEventProcessor.cs" />
-     <Compile Include="Assets\CrossPromotion\Plugins\UniWebViewPluginAndroid.cs" />
-     <Compile Include="Assets\CrossPromotion\Plugins\UniWebViewPluginMacEditor.cs" />
-     <Compile Include="Assets\CrossPromotion\Plugins\UniWebViewPluginWP.cs" />
-     <Compile Include="Assets\CrossPromotion\Plugins\UniWebViewPluginiOS.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CoroutineController.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CoroutineState.cs" />
      <Compile Include="Assets\CrossPromotion\Script\Coroutiner.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CrossPromotion.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CrossPromotionConfig.cs" />
-     <Compile Include="Assets\CrossPromotion\Script\CrossPromotionController.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CrossPromotionData.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CrossPromotionItemConfig.cs" />
      <Compile Include="Assets\CrossPromotion\Script\CrossPromotionItemData.cs" />
      <Compile Include="Assets\CrossPromotion\Script\Error.cs" />
      <Compile Include="Assets\CrossPromotion\Script\Interact.cs" />
      <Compile Include="Assets\CrossPromotion\Script\Utils.cs" />
-     <Compile Include="Assets\CrossPromotion\UniWebView\Script\Helper\UniWebViewHelper.cs" />
-     <Compile Include="Assets\CrossPromotion\UniWebView\Script\UniWebView.cs" />
-     <Compile Include="Assets\CrossPromotion\UniWebView\Script\UniWebViewEdgeInsets.cs" />
-     <Compile Include="Assets\CrossPromotion\UniWebView\Script\UniWebViewMessage.cs" />
-     <Compile Include="Assets\CrossPromotion\UniWebView\Script\UniWebViewOrientation.cs" />
-     <Compile Include="Assets\CrossPromotion\UniWebView\Script\UniWebViewTransitionEdge.cs" />
      <Compile Include="Assets\CrossPromotion\test.cs" />
-     <None Include="Assets\CrossPromotion\UniWebView\Readme.txt" />
-     <None Include="Assets\CrossPromotion\Plugins\Android\AndroidManifest.xml" />
+     <Compile Include="Assets\UniWebView\Script\Helper\UniWebViewHelper.cs" />
+     <Compile Include="Assets\UniWebView\Script\UniWebView.cs" />
+     <Compile Include="Assets\UniWebView\Script\UniWebViewEdgeInsets.cs" />
+     <Compile Include="Assets\UniWebView\Script\UniWebViewMessage.cs" />
+     <Compile Include="Assets\UniWebView\Script\UniWebViewOrientation.cs" />
+     <Compile Include="Assets\UniWebView\Script\UniWebViewTransitionEdge.cs" />
+     <None Include="Assets\UniWebView\Readme.txt" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -107,8 +101,12 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="UniWebViewWP">
- <HintPath>C:/UnityProject/TestAds/Assets/CrossPromotion/Plugins/UniWebViewWP.dll</HintPath>
+ <HintPath>F:/N.T.T/Unity Project/unityCrossPromotion/Assets/Plugins/UniWebViewWP.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{85133A6D-7C10-E2A4-8897-B4068E14D5A2}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

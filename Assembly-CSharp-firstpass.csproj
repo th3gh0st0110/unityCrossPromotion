@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{10924B19-86BC-417C-8331-D52C84963BE1}</ProjectGuid>
+    <ProjectGuid>{85133A6D-7C10-E2A4-8897-B4068E14D5A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
@@ -75,7 +75,7 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="UniWebViewWP">
- <HintPath>C:/UnityProject/TestAds/Assets/Plugins/UniWebViewWP.dll</HintPath>
+ <HintPath>F:/N.T.T/Unity Project/unityCrossPromotion/Assets/Plugins/UniWebViewWP.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
