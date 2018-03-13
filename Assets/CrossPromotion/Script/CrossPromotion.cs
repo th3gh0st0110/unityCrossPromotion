@@ -89,11 +89,7 @@ namespace crosspromotion {
 		}
 
 		static void CheckCrosspromotionStatus(CrossPromotionData data, CrossPromotionItemConfig item, bool isInit) {
-			string appId = item.androidLink;
-#if UNITY_IPHONE
-			appId = item.iosLink;
-#endif
-			string id = Utils.GetValueFromUrl(appId, "id");
+			string id = Utils.GetValueFromUrl(item.GetLink(), "id");
 			if (Utils.checkPackageAppIsPresent(id)) {
 				if (isInit) {
 					data.GetItem(item.id).SetInvalid();
@@ -154,7 +150,7 @@ namespace crosspromotion {
 		}
 
 		private static IEnumerator DelayOpenApp(CrossPromotionItemConfig item) {
-			string appId = Utils.GetValueFromUrl(item.GetAppId(), "id");
+			string appId = Utils.GetValueFromUrl(item.GetLink(), "id");
 			yield return null;
 			yield return null;
 			interact.Invoke(Interact.InstallApp, item);

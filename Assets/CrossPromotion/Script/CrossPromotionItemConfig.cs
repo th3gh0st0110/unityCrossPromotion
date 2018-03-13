@@ -12,7 +12,7 @@ namespace crosspromotion {
 		public string androidLink { get; set; }
 		public string iosLink { get; set; }
 		public bool enable { get; set; }
-		public string GetAppId() {
+		public string GetLink() {
 #if UNITY_IPHONE
 				return iosLink;
 #else
