@@ -18,7 +18,7 @@ namespace crosspromotion {
 		private static Action<string, int> rewardAction = delegate (string s, int i) { };
 		private static Action onOpen = delegate { };
 		private static Action onClose = delegate { };
-		private static Action<Interact, string> interact = delegate (Interact interact1, string appID) { };
+		private static Action<Interact, CrossPromotionItemConfig> interact = delegate (Interact interact1, CrossPromotionItemConfig item) { };
 		private static CrossPromotionData data;
 
 		public static void ListenError(Action<Error, string> action) {
@@ -29,7 +29,7 @@ namespace crosspromotion {
 			rewardAction += action;
 		}
 
-		public static void ListenInteractAction(Action<Interact, string> action) {
+		public static void ListenInteractAction(Action<Interact, CrossPromotionItemConfig> action) {
 			interact += action;
 		}
 
@@ -131,11 +131,11 @@ namespace crosspromotion {
 				int value = 0;
 				string type = message.args["type"];
 				if (int.TryParse(message.args["value"], out value) & int.TryParse(message.args["id"], out id)) {
-					string appId = crossPromotionConfig.GetAppId(id);
+					CrossPromotionItemConfig item = crossPromotionConfig.GetCrossPromotionItemConfig(id);
 					data.GetItem(id).Claim();
 					Save();
 					rewardAction.Invoke(type, value);
-					interact.Invoke(Interact.ClaimReward, appId);
+					interact.Invoke(Interact.ClaimReward, item);
 				}
 
 			}
@@ -143,8 +143,7 @@ namespace crosspromotion {
 				Close(webView);
 				try {
 					string id = message.args["id"];
-					string appId = crossPromotionConfig.GetAppId(int.Parse(id));
-					Coroutiner.StartCoroutine(DelayOpenApp(appId));
+					Coroutiner.StartCoroutine(DelayOpenApp(crossPromotionConfig.GetCrossPromotionItemConfig(int.Parse(id))));
 
 				}
 				catch (Exception e) {
@@ -154,10 +153,11 @@ namespace crosspromotion {
 			}
 		}
 
-		private static IEnumerator DelayOpenApp(string appId) {
+		private static IEnumerator DelayOpenApp(CrossPromotionItemConfig item) {
+			string appId = Utils.GetValueFromUrl(item.GetAppId(), "id");
 			yield return null;
 			yield return null;
-			interact.Invoke(Interact.InstallApp, appId);
+			interact.Invoke(Interact.InstallApp, item);
 			Application.OpenURL(appId);
 		}
 		static void Close(UniWebView webView) {
