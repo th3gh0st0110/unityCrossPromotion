@@ -150,11 +150,10 @@ namespace crosspromotion {
 		}
 
 		private static IEnumerator DelayOpenApp(CrossPromotionItemConfig item) {
-			string appId = Utils.GetValueFromUrl(item.GetLink(), "id");
 			yield return null;
 			yield return null;
 			interact.Invoke(Interact.InstallApp, item);
-			Application.OpenURL(appId);
+			Application.OpenURL(item.GetLink());
 		}
 		static void Close(UniWebView webView) {
 			GameObject.Destroy(webView);
