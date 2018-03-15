@@ -129,7 +129,7 @@ namespace crosspromotion {
 				if (int.TryParse(message.args["value"], out value) & int.TryParse(message.args["id"], out id)) {
 					CrossPromotionItemConfig item = crossPromotionConfig.GetCrossPromotionItemConfig(id);
 					data.GetItem(id).Claim();
-					Save();
+					Save(data);
 					rewardAction.Invoke(type, value);
 					interact.Invoke(Interact.ClaimReward, item);
 				}
@@ -182,7 +182,7 @@ namespace crosspromotion {
 			else {
 				CrossPromotionData ret = new CrossPromotionData();
 				CheckCrosspromotionStatus(ret, true);
-				Save();
+				Save(ret);
 				return ret;
 			}
 		}
@@ -192,9 +192,9 @@ namespace crosspromotion {
 		private static string FilePath() {
 			return Application.persistentDataPath + "/" + fileName;
 		}
-		private static void Save() {
-			if (data != null) {
-				string text = JsonMapper.ToJson(data);
+		private static void Save(CrossPromotionData d) {
+			if (d != null) {
+				string text = JsonMapper.ToJson(d);
 				BinaryFormatter bf = new BinaryFormatter();
 				FileStream stream = new FileStream(FilePath(), FileMode.Create);
 				bf.Serialize(stream, text);
