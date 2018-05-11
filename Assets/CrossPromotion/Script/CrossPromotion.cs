@@ -41,6 +41,31 @@ namespace crosspromotion {
 			onClose += action;
 		}
 
+		public static void HasClaimedAllReward(string domain,Action<bool> callBack)
+		{
+			Action<bool, string> loadConfigCallBack = delegate (bool success, string s) {
+				if (success) {
+					data = LoadUserData();
+					List<CrossPromotionItemConfig> items = crossPromotionConfig.GetList();
+					bool flag = true;
+					for (int i = 0; i < items.Count; i++)
+					{
+						if (!data.GetItem(items[i].id).isClaimed)
+						{
+							flag = false;
+							break;
+						}
+					}
+					callBack.Invoke(flag);
+				}
+				else {
+					callBack.Invoke(true);
+					errorAction.Invoke(Error.LoadConfig, s);
+				}
+			};
+			Coroutiner.StartCoroutine(LoadConfig(domain, loadConfigCallBack));
+		}
+
 		public static void Show(string domain) {
 			Action<bool> action = delegate (bool hasInternet) {
 				if (hasInternet) {
