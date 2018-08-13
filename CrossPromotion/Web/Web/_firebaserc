@@ -1,7 +1,0 @@
-{
-  "projects": {
-    "default": "test-adbdb",
-    "dev": "test-adbdb",
-    "release": "shadow-of-death-177610"
-  }
-}
